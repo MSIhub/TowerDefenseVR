@@ -7,7 +7,7 @@ public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _enemyPrefab;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private float _timeBetweenWaves = 5f;
+    [SerializeField] private float _timeBetweenWaves = 10f;
     [SerializeField] private TextMeshProUGUI _countDownTimerText;
     private float _countDown = 2f;//time for spawning first wave
     private int waveIndex = 0;

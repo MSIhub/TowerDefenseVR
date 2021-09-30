@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/TowerDefenseVR.unity
+    guid: 83b6fb0258c7268459629dfefcae544e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e4524e9b72b25c948bc950f018e4df3a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 5aa2d94c5aefc404db63859f2da05ed7, type: 2}

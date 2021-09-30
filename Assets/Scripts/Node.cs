@@ -11,8 +11,9 @@ public class Node : MonoBehaviour
     [SerializeField] private Vector3 _positionOffsetTurret;
     private Renderer _rend;
     private Material _initNodeMaterial;
-
-    private GameObject turret;
+    
+    [Header("Optional")]
+    public GameObject turret;
     private BuildManager _buildManager;
 
     private void Awake()
@@ -35,7 +36,7 @@ public class Node : MonoBehaviour
     
     private void NodeHoverEnter(HoverEnterEventArgs arg0)
     {
-        if (_buildManager.GetTurretToBuild() == null) return;
+        if (!_buildManager.CanBuild) return;
         _rend.material = hoverMaterial;
     }
     
@@ -46,7 +47,7 @@ public class Node : MonoBehaviour
     
     private void NodeSelectEnter(SelectEnterEventArgs arg0)
     {
-        if (_buildManager.GetTurretToBuild() == null) return;
+        if (!_buildManager.CanBuild) return;
         
         if (turret!=null)
         {
@@ -55,8 +56,7 @@ public class Node : MonoBehaviour
         }
         
         //Build a turret
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-        turret = (GameObject) Instantiate(turretToBuild, transform.position + _positionOffsetTurret, transform.rotation);
+        _buildManager.BuildTurretOn(this);
     }
     
     private void NodeSelectExit(SelectExitEventArgs arg0)
@@ -64,6 +64,10 @@ public class Node : MonoBehaviour
         
     }
 
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + _positionOffsetTurret;
+    }
 
     
 }

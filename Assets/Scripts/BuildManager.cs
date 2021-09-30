@@ -8,7 +8,7 @@ public class BuildManager : MonoBehaviour
     public GameObject standardTurretPrefab;
     public GameObject missileTurretPrefab;
     public GameObject laserTurretPrefab;
-    private GameObject _turretToBuild;
+    private TurretBlueprint _turretToBuild;
     
     //singeleton pattern --> One buildmanager
     public static BuildManager instance;
@@ -20,17 +20,27 @@ public class BuildManager : MonoBehaviour
         }
         instance = this;
     }
-    
-    public GameObject GetTurretToBuild()
-    {
-        return _turretToBuild;
-    }
 
-    public void SetTurretToBuild(GameObject turret)
+    public bool CanBuild => _turretToBuild != null;
+
+    public void SelectTurretToBuild(TurretBlueprint turret)
     {
         _turretToBuild = turret;
     }
-    
+
+    public void BuildTurretOn(Node node)
+    {
+        if (PlayerStats.Money < _turretToBuild.cost)
+        {
+            Debug.Log("Not enough money");
+        }
+
+        PlayerStats.Money -= _turretToBuild.cost;
+        GameObject turret = (GameObject) Instantiate(_turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.turret = turret;
+        
+        Debug.Log("Turret built! Money Left: "+ PlayerStats.Money.ToString());
+    }
   
   
  
