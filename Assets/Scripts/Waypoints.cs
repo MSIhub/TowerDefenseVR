@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class WaypointsController : MonoBehaviour
+public class Waypoints : MonoBehaviour
 {
     public static Transform[] waypoints;
 
@@ -14,5 +14,14 @@ public class WaypointsController : MonoBehaviour
             waypoints[i] = transform.GetChild(i);
         }
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (waypoints == null) return;
+        for (int i = 0; i < waypoints.Length-1; i++)
+        {
+            Gizmos.DrawLine(waypoints[i].position, waypoints[i+1].position);
+        }
     }
 }

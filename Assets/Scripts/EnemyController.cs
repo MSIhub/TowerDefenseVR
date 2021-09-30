@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _target = WaypointsController.waypoints[0];
+        _target = Waypoints.waypoints[0];
 
     }
 
@@ -34,10 +34,10 @@ public class EnemyController : MonoBehaviour
 
     private void GetNextWayPoint()
     {
-        if (wavepointIndex < WaypointsController.waypoints.Length - 1)
+        if (wavepointIndex < Waypoints.waypoints.Length - 1)
         {
             wavepointIndex++;
-            _target = WaypointsController.waypoints[wavepointIndex];
+            _target = Waypoints.waypoints[wavepointIndex];
         }
         else
         {
