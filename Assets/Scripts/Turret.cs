@@ -1,18 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] private float _range = 0.25f;
+    [FoldoutGroup("Attributes")] [SerializeField] private float _range = 0.25f;
+    [FoldoutGroup("Attributes")] [SerializeField] private float _fireRate = 1f;
+    
+    private float _fireCountDown = 0f;
+    private Transform _target;
+    
+    [Header("Unity Setup Field")]
     [SerializeField] private string enemyTag = "Enemy";
     [SerializeField] private Transform _rotationAnchor;
     [SerializeField] private float _turnSpeed = 10f;
-    [SerializeField] private float _fireRate = 1f;
-    private float _fireCountDown = 0f;
-    private Transform _target;
+    
+    [Header("Bullet")]
+    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _firePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +47,13 @@ public class Turret : MonoBehaviour
     }
 
     private void Shoot()
-    {       
-        Debug.Log("Shoot");
+    {
+        GameObject bulletGameObject = (GameObject) Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+        Bullet bullet = bulletGameObject.GetComponent<Bullet>();
+        if (bullet !=null)
+        {
+            bullet.SetTarget(_target);
+        }
     }
 
     private void UpdateTarget()
